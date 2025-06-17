@@ -1,46 +1,46 @@
 # 🧠 PySpark Data Engineering
 
-Repositorio con scripts y notebooks utilizados para la gestión de datos utilizando PySpark y SQL en entornos distribuidos. Este repositorio incluye buenas prácticas, snippets reutilizables, y soluciones a problemas comunes al manejar grandes volúmenes de datos.
+Repository containing scripts and notebooks used for data management using PySpark and SQL in distributed environments. This repository includes best practices, reusable snippets, and solutions to common problems when handling large volumes of data.
 
-## 🚀 Funcionalidades y tareas comunes incluidas
+## 🚀 Common features and tasks included
 
-### 🔄 Ingesta y transformación de datos
-- 📥 Lectura de datos en formatos como Parquet, CSV, Delta, JSON desde ADLS o sistemas externos.
-- 🔗 Unión y limpieza de datos provenientes de SAP
-- 🧽 Normalización y validación de estructuras multi-tabla antes de persistencia.
-- 🕹️ Automatización de procesos de ingestión por fecha, con widgets o parámetros externos
+### 🔄 Data Ingestion and Transformation
+- 📥 Reading data in formats such as Parquet, CSV, Delta, JSON from ADLS or external systems.
+- 🔗 Joining and cleansing data from SAP
+- 🧽 Normalization and validation of multi-table structures before persistence.
+- 🕹️ Automation of ingestion processes by date, with widgets or external parameters
+### 🧮 Processing with PySpark
+- 📊 Calculating aggregations (by day, month, country, etc.) using `groupBy` and `agg`.
+- 🔍 Comparing datasets (e.g., UDL vs. MDL differences).
+- 🧬 Calculating data quality metrics (nulls, duplicates, skew).
+- 🧠 Using custom functions (`udf`, `withColumn`, `lit`, `when`).
+- 🧰 Applying dynamic filters and complex joins with multiple conditions.
 
-### 🧮 Procesamiento con PySpark
-- 📊 Cálculo de agregaciones (por día, mes, país, etc.) usando `groupBy` y `agg`.
-- 🔍 Comparación entre datasets (por ejemplo, diferencias UDL vs MDL).
-- 🧬 Cálculo de métricas de calidad de datos (nulos, duplicados, desviaciones).
-- 🧠 Uso de funciones personalizadas (`udf`, `withColumn`, `lit`, `when`).
-- 🧰 Aplicación de filtros dinámicos y joins complejos con condiciones múltiples.
+### 🧾 SQL on Spark
+- 📝 Running SQL queries on DataFrames or tables registered in the metastore (`%sql` in Databricks).
+- ⚖️ Data comparison with `EXCEPT`, `UNION ALL`, `JOIN`, and `CASE WHEN`.
+- 🚀 Query optimization with temporal views and intermediate persistence.
 
-### 🧾 SQL sobre Spark
-- 📝 Consultas SQL sobre DataFrames o tablas registradas en el metastore (`%sql` en Databricks).
-- ⚖️ Comparación de datos con `EXCEPT`, `UNION ALL`, `JOIN` y `CASE WHEN`.
-- 🚀 Optimización de queries con vistas temporales y persistencia intermedia.
+### 🧰 Format and partition management
+- 🗂️ Writing data to partitioned Delta tables (`partitionBy("COUNTRY", "FILE_DATE")`).
+- 🔁 Migration of Parquet tables to Delta Lake to improve consistency.
+- 🧾 Reading `_delta_log` and version control.
 
-### 🧰 Gestión de formatos y particiones
-- 🗂️ Escritura de datos en tablas Delta particionadas (`partitionBy("COUNTRY", "FILE_DATE")`).
-- 🔁 Migración de tablas Parquet a Delta Lake para mejorar consistencia.
-- 🧾 Lectura de `_delta_log` y control de versiones.
+### 🔁 Scheduled processes and monitoring
+- ✅ Generation of daily and monthly integrity validations between layers.
+- ⚠️ Automatic detection of deviations of more than 5% in key metrics.
+- ⏱️ Control executions by timestamp (`EXECUTION_TIMESTAMP`).
+- 📧 Sending email alerts via Databricks Workflow or Azure Data Factory.
 
-### 🔁 Procesos programados y monitoreo
-- ✅ Generación de validaciones diarias y mensuales de integridad entre capas.
-- ⚠️ Detección automática de desviaciones de más del 5% en métricas clave.
-- ⏱️ Control de ejecuciones por timestamp (`EXECUTION_TIMESTAMP`).
-- 📧 Envío de alertas por correo vía Databricks Workflow o Azure Data Factory.
+## 📦 Popular codes and patterns included
 
-## 📦 Códigos y patrones populares incluidos
+- 🔗 `unionByName` to combine multiple DataFrames.
+- 🧩 `MERGE INTO` merges for efficient Delta table updates.
+- ❓ `isEmpty()` and `count()` as pre-write validation.
+- 🧱 Using `create_schema`, `truncate_table`, and `get_latest_hour` functions.
 
-- 🔗 `unionByName` para combinar múltiples DataFrames.
-- 🧩 `merge` tipo `MERGE INTO` para actualizaciones eficientes de tablas Delta.
-- ❓ `isEmpty()` y `count()` como validación previa a escritura.
-- 🧱 Uso de funciones `create_schema`, `truncate_table`, `get_latest_hour`.
-- ⚙️ Modularización del código con funciones como:
-  - `ret_mdl(granularity)`
-  - `ret_udl(granularity)`
-  - `reading_source_date(start, end)`
-  - `loading_temp(df, path, table_type)`
+- ⚙️ Code modularization with functions such as:
+- `ret_mdl(granularity)`
+- `ret_udl(granularity)`
+- `reading_source_date(start, end)`
+- `loading_temp(df, path, table_type)`
